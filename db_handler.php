@@ -36,7 +36,7 @@ class db_handler {
         return $pids['pids'];
     }
 
-    function add_promiser( $id, $hash ){
+    function add_user_promiser( $id, $hash ){
         $pids = $this->get_promisers_list( $hash );
         $put = $pids . "," . $id;
         $query = "UPDATE `users` SET `pids`='".$put."' WHERE `hash`='".$hash."' ";
@@ -62,7 +62,7 @@ class db_handler {
             $hash = $this->build_hash( $id );
             setcookie( 'prom_hash', $hash, time()+60*60*24*365 );
         }else{
-            $this->add_promiser( $id, $_COOKIE['prom_hash'] );
+            $this->add_user_promiser( $id, $_COOKIE['prom_hash'] );
         }
     }
 
