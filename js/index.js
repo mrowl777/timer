@@ -18,7 +18,44 @@ function init(){
     input.show(500);
   });
 
+  $('.add_field').on( 'keyup', function keyup( e ) {
+    if( e.keyCode == 13 ){
+      add_ex_promiser( input.val() );
+    }
+  });
+
   $('#submit').click( add_new_promiser );
+}
+
+function add_ex_promiser( $name ){
+  $.post(
+    "handler.php",
+    {
+        action: "add_ex_promiser",
+        promiser: name,
+    },
+
+    on_answer
+  );
+}
+
+function on_answer( data ){
+  var response = $.parseJSON( data );
+
+  if( response.result == 'not_found' ){
+    alert('Такого пассажира в нашу базу  не залетало');
+    return;
+  }
+  if( response.result == 'no_cookie' ){
+    alert('Мы тебя не узнаем. Добавь как минимум одного должника заново');
+    return;
+  }
+  if( response.result == 'already_exist' ){
+    alert('Терпила уже под вашим наблюдением');
+    return;
+  }
+
+  alert('Терпила добавлен');
 }
 
 function add_new_promiser(){

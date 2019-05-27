@@ -28,7 +28,7 @@ class db_handler {
     }
 
     function get_promisers_list( $hash ){
-        $query = "SELECT `pids` FROM `users` WHERE `hash` = '".$hash."'";
+        $query = "SELECT * FROM `users` WHERE `hash` = '".$hash."'";
         $db_helper = $this->connect_db();
         $pids = $db_helper->query( $query );
         $pids = $pids->fetch_assoc();
@@ -66,6 +66,18 @@ class db_handler {
         }
     }
 
+    function search_promiser( $name ){
+        $query = "SELECT `id` FROM `promisers` WHERE `name` = '".$name."'";
+        $db_helper = $this->connect_db();
+        $id = $db_helper->query( $query );
+        $count = mysqli_num_rows( $id ) === 0;
+        if( $count ){
+            return false;
+        }
+        $id = $id->fetch_assoc();
+        $this->close_connection( $db_helper );
+        return $id['id'];
+    }
 }
 
 ?>
