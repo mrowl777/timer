@@ -42,6 +42,9 @@ function add_ex_promiser( name ){
 function on_answer( data ){
   var response = $.parseJSON( data );
 
+  $('.add_field').hide(500);
+  $('#_add').show(500);
+
   if( response.result == 'not_found' ){
     alert('Такого пассажира в нашу базу  не залетало');
     return;
