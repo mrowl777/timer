@@ -20,7 +20,7 @@ function init(){
 
   $('.add_field').on( 'keyup', function keyup( e ) {
     if( e.keyCode == 13 ){
-      add_ex_promiser( input.val() );
+      add_ex_promiser( $(this).val() );
     }
   });
 
