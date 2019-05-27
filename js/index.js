@@ -27,7 +27,7 @@ function init(){
   $('#submit').click( add_new_promiser );
 }
 
-function add_ex_promiser( $name ){
+function add_ex_promiser( name ){
   $.post(
     "handler.php",
     {
