@@ -50,7 +50,6 @@ function add_new_promiser(){
 }
 
 function on_handler_answer( data ){
-alert(data);
   var response = $.parseJSON( data );
 
   if( response.result == 'ok' ){
