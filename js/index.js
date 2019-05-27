@@ -33,12 +33,6 @@ function add_new_promiser(){
   }else{
     tax = $('#every_summ').val();
   }
-  console.log(name);
-  console.log(date);
-  console.log(summ);
-  console.log(period);
-  console.log(count_type);
-  console.log(tax);
   $.post(
     "handler.php",
     {
@@ -56,7 +50,7 @@ function add_new_promiser(){
 }
 
 function on_handler_answer( data ){
-
+alert(response);
   var response = $.parseJSON( data );
 
   if( response.result == 'ok' ){
