@@ -12,6 +12,18 @@ class Handler extends db_handler {
         $count_type = $_POST['count_type'];
         $tax = $_POST['tax'];
 
+        switch ($period) {
+            case 'day':
+                $period = 1;
+                break;
+            case 'week':
+                $period = 7;
+                break;
+            case 'month':
+                $period = 30;
+                break;
+        }
+
         $this->put_new_promiser( $name, $start_date, $summ, $period, $count_type, $tax );
 
         die( json_encode(['result' => 'ok']) );
