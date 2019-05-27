@@ -20,15 +20,15 @@
 <div class="content">
     <div class="block">
             <p>Погоняло?</p>
-            <input type="text" id="name" autocomplete="off">
+            <input type="text" id="name" autocomplete="off" required>
     </div>
     <div class="block">
         <p>С какого числа терпила торчит?</p>
-        <input type="date" id="start" name="trip-start">
+        <input type="date" id="start" name="trip-start" required>
     </div>
     <div class="block">
         <p>Много? Укажи сумму в деревянных</p>
-        <input type="number" id="count" >
+        <input type="number" id="count" required>
     </div>
     <div class="block">
         <p>Как обдирать будем? Каждый ..</p>

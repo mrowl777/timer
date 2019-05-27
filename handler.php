@@ -1,36 +1,29 @@
 <?php
 
-class Handler{
+include 'db_handler.php';
 
-    function find_palindrome(){
-        $string = $_POST['input'];
-        $palindromes = [];
-        $words_list = preg_split("/[\s,.:;]+/", $string);
-        foreach ( $words_list as $word ) {
-            preg_match_all('/./us', $word, $result);
-            $revert = join( '', array_reverse($result[0]) );
-            if( $word == $revert && iconv_strlen($word) != 1 ){
-                $palindromes[] = $word;
-            }
-        }
-        if( empty($palindromes) ){
-            die( json_encode(['result' => 'not_found']) );
-        }
+class Handler extends db_handler {
 
-        $response = [
-            'result' => 'ok', 
-            'data' => $palindromes
-        ];
+    function add_promiser(){
+        $name = $_POST['promiser'];
+        $start_date = $_POST['date'];
+        $summ = $_POST['summ'];
+        $period = $_POST['period'];
+        $count_type = $_POST['count_type'];
+        $tax = $_POST['tax'];
 
-        die( json_encode($response) );
+        $this->put_new_promiser( $name, $start_date, $summ, $period, $count_type, $tax );
+
+        die( json_encode(['result' => 'ok']) );
     }
 }
 
 $handler = new Handler();
+
 if( isset( $_POST['action'] ) ){
     switch ( $_POST['action'] ) {
-        case 'get_palindrome':
-            $handler->find_palindrome();
+        case 'add_promiser':
+            $handler->add_promiser();
             break;
         
         default:

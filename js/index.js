@@ -17,35 +17,55 @@ function init(){
     $(this).hide(200);
     input.show(500);
   });
+
+  $('#submit').click( add_new_promiser );
 }
 
-// function get_data( string ){
-//   if( string == '' ){
-//     return alert('Введите строку');
-//   }
-//   $.post(
-//     "handler.php",
-//     {
-//         action: "get_palindrome",
-//         input: string
-//     },
+function add_new_promiser(){
+  var name = $('#name').val();
+  var date = $('#start').val();
+  var summ = $('#count').val();
+  var period = $('#period_type').find('option:selected').val();
+  var count_type = $('#count_type').find('option:selected').val();
+  var tax;
+  if( count_type == 'percent' || count_type == 'percent_cur' ){
+    tax = $('#percents_block').find('option:selected').val();
+  }else{
+    tax = $('#every_summ').val();
+  }
+  console.log(name);
+  console.log(date);
+  console.log(summ);
+  console.log(period);
+  console.log(count_type);
+  console.log(tax);
+  $.post(
+    "handler.php",
+    {
+        action: "add_promiser",
+        promiser: name,
+        date: date,
+        summ: summ,
+        period: period,
+        count_type: count_type,
+        tax: tax,
+    },
 
-//     on_handler_answer
-//   );
-// }
+    on_handler_answer
+  );
+}
 
-// function on_handler_answer( data ){
+function on_handler_answer( data ){
 
-//   var response = $.parseJSON( data );
-//   var input = $( '.input' );
+  var response = $.parseJSON( data );
 
-//   if( response.result == 'not_found' ){
-//     input.val( 'палидромы не обнаружены' );
-//     return;
-//   }
+  if( response.result == 'ok' ){
+    document.location.reload();
+    return;
+  }
 
-//   input.val( response.data );
-// }
+  alert('Произошла ошибка. Попруйте еще раз');
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     init();
